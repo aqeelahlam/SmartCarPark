@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'layoutSize.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -69,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    layoutSize().init(context);
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -91,38 +94,43 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ParkingSlot(true, 'A1'),
-          ParkingSlot(false, 'B1'),
+        ParkingSlot(true, 'A1', 'car_A'),
+        Road(),
+        ParkingSlot(false, 'B1', 'car_B'),
         ],
       ),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ParkingSlot(true, 'A2'),
-          ParkingSlot(true, 'B2'),
+          ParkingSlot(true, 'A2', 'car_A'),
+          Road(),
+          ParkingSlot(true, 'B2', 'car_B'),
         ],
       ),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ParkingSlot(false, 'A3'),
-          ParkingSlot(false, 'B3'),
+          ParkingSlot(false, 'A3', 'car_A'),
+          Road(),
+          ParkingSlot(false, 'B3', 'car_B'),
         ],
       ),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ParkingSlot(false, 'A4'),
-          ParkingSlot(true, 'B4'),
+          ParkingSlot(false, 'A4', 'car_A'),
+          Road(),
+          ParkingSlot(true, 'B4', 'car_B'),
         ],
       ),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ParkingSlot(true, 'A5'),
-          ParkingSlot(true, 'B5'),
+          ParkingSlot(true, 'A5', 'car_A'),
+          Road(),
+          ParkingSlot(true, 'B5', 'car_B'),
         ],
       ),
       Row(
@@ -145,22 +153,48 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 
+class Road extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+//      height: layoutSize.blockSizeVertical * 12,
+//      width: layoutSize.blockSizeHorizontal * 13,
+    height: 100,
+    width: 100,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/images/road.png'),
+            fit: BoxFit.fill,),
+        ),
+      );
+  }
+
+}
+
+
 class ParkingSlot extends StatelessWidget {
   bool occupied;
   String slotNumber;
-  ParkingSlot(bool occupied, slotNumber) {
+  String rowNumber;
+  ParkingSlot(bool occupied, slotNumber, rowNumber) {
     this.occupied = occupied;
     this.slotNumber = slotNumber;
+    this.rowNumber = rowNumber;
   }
   @override
   Widget build(BuildContext context) {
     if (occupied == false){
       return Container(
-        width: 250,
-        height: 100,
+        height: layoutSize.blockSizeVertical * 12,
+        width: layoutSize.blockSizeHorizontal * 30,
+//        width: 250,
+//        height: 100,
         decoration: BoxDecoration(
           color: Colors.green,
           border: Border.all(),
+          image: DecorationImage(
+            image: AssetImage('assets/images/noun_Parking_2313077.png'),
+          ),
         ),
         child: new Text(slotNumber,
         style: TextStyle(
@@ -171,11 +205,16 @@ class ParkingSlot extends StatelessWidget {
     }
     else {
       return Container(
-        width: 250,
-        height: 100,
+        height: layoutSize.blockSizeVertical * 12,
+        width: layoutSize.blockSizeHorizontal * 30,
+//        width: 250,
+//        height: 100,
         decoration: BoxDecoration(
           color: Colors.red,
           border: Border.all(),
+          image: DecorationImage(
+          image: AssetImage('assets/images/' + rowNumber + '.png'),
+          ),
         ),
         child: new Text(slotNumber,
           style: TextStyle(
@@ -193,7 +232,7 @@ class EmptyBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 500,
+      width: 109,
       height: 50,
       alignment: Alignment(0.0, -0.1),
     );
@@ -204,8 +243,8 @@ class Entrance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 50,
+      height: layoutSize.blockSizeVertical * 8,
+      width: layoutSize.blockSizeHorizontal * 25,
       alignment: Alignment(0.0, -0.1),
       decoration: BoxDecoration(
         color: Colors.black54,
