@@ -86,7 +86,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontSize: 35.0
             ),),
     ),
-    body: Column(children: <Widget>[
+    body: Card(
+        elevation: 5,
+        margin: EdgeInsets.all(10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        color: Colors.black45,
+        child: Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -148,7 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     ]
     )
-    );
+    )
+        );
   }
 }
 
