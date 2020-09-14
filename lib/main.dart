@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'layoutSize.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flushbar/flushbar.dart';
 
 void main() {
   runApp(MyApp());
@@ -53,21 +54,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _selectedIndex = 0;
 
-  void _incrementCounter() {
+  void _onFloorTapped(int index) {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _selectedIndex = index;
     });
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +79,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontSize: 35.0
             ),),
     ),
-    body: Card(
+    body: new _FloorLayout()._getFloorLayout(_selectedIndex),
+    bottomNavigationBar: BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.directions_car),
+          title: Text('Ground Floor', style: TextStyle(color: Colors.white)),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.directions_car),
+          title: Text('Level 1', style: TextStyle(color: Colors.white)),
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.blueAccent,
+      backgroundColor: Colors.black54,
+      onTap: _onFloorTapped,
+    ),
+    );
+  }
+}
+
+
+class _FloorLayout {
+  static List<Card> _layoutOptions =
+    <Card>[
+      Card(
         elevation: 5,
         margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(
@@ -94,71 +112,138 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         color: Colors.black45,
         child: Column(children: <Widget>[
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          EmptyBox(),
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-        ParkingSlot(true, 'A1', 'car_A'),
-        Road(),
-        ParkingSlot(false, 'B1', 'car_B'),
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ParkingSlot(true, 'A2', 'car_A'),
-          Road(),
-          ParkingSlot(true, 'B2', 'car_B'),
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ParkingSlot(false, 'A3', 'car_A'),
-          Road(),
-          ParkingSlot(false, 'B3', 'car_B'),
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ParkingSlot(false, 'A4', 'car_A'),
-          Road(),
-          ParkingSlot(true, 'B4', 'car_B'),
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ParkingSlot(true, 'A5', 'car_A'),
-          Road(),
-          ParkingSlot(true, 'B5', 'car_B'),
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          EmptyBox(),
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Entrance(),
-        ],
-      )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              EmptyBox(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+//        ParkingSlot(true, 'A1', 'car_A'),
+              ParkingSlot(false, 'A1', 'car_A'),
+              Road(),
+//        ParkingSlot(false, 'B1', 'car_B'),
+              ParkingSlot(true, 'B1', 'car_B'),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ParkingSlot(true, 'A2', 'car_A'),
+//          ParkingSlot(false, 'A2', 'car_A'),
+              Road(),
+              ParkingSlot(true, 'B2', 'car_B'),
+//          ParkingSlot(false, 'B2', 'car_B'),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ParkingSlot(false, 'A3', 'car_A'),
+//          ParkingSlot(true, 'A3', 'car_A'),
+              Road(),
+              ParkingSlot(false, 'B3', 'car_B'),
+//          ParkingSlot(true, 'B3', 'car_B'),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ParkingSlot(true, 'A4', 'car_A'),
+//          ParkingSlot(false, 'A4', 'car_A'),
+              Road(),
+              ParkingSlot(false, 'B4', 'car_B'),
+//          ParkingSlot(true, 'B4', 'car_B'),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              EmptyBox(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Entrance(),
+            ],
+          )
 
-    ]
-    )
-    )
-        );
+        ]
+      )
+    ),
+
+      Card(
+        elevation: 5,
+        margin: EdgeInsets.all(10),
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        ),
+        color: Colors.black45,
+        child: Column(children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              EmptyBox(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+    //        ParkingSlot(true, 'A1', 'car_A'),
+              ParkingSlot(false, 'A1', 'car_A'),
+              Road(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ParkingSlot(true, 'A2', 'car_A'),
+            //          ParkingSlot(false, 'A2', 'car_A'),
+              Road(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ParkingSlot(false, 'A3', 'car_A'),
+            //          ParkingSlot(true, 'A3', 'car_A'),
+              Road(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ParkingSlot(true, 'A4', 'car_A'),
+            //          ParkingSlot(false, 'A4', 'car_A'),
+              Road(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              EmptyBox(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Entrance(),
+            ],
+          )
+
+        ]
+      )
+    ),
+  ];
+
+  Card _getFloorLayout(int index) {
+    return _layoutOptions.elementAt(index);
   }
 }
+
 
 
 class Road extends StatelessWidget {
@@ -192,27 +277,63 @@ class ParkingSlot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (occupied == false){
-      return Container(
-        height: layoutSize.blockSizeVertical * 12,
-        width: layoutSize.blockSizeHorizontal * 30,
-//        width: 250,
-//        height: 100,
-        decoration: BoxDecoration(
-          color: Colors.green,
-          border: Border.all(),
-          image: DecorationImage(
-            image: AssetImage('assets/images/noun_Parking_2313077.png'),
+      return GestureDetector(
+          onTap: () {
+            Flushbar(
+              title: "Parking Slot: " + slotNumber,
+              message: "Status: Available",
+              flushbarStyle: FlushbarStyle.FLOATING,
+              margin: EdgeInsets.all(8),
+              borderRadius: 8,
+              icon: Icon(
+                Icons.info_outline,
+                size: 28.0,
+                color: Colors.blue[300],
+              ),
+              duration: Duration(seconds: 3),
+              leftBarIndicatorColor: Colors.blue[300],
+            )..show(context);
+          },
+        child: Container(
+          height: layoutSize.blockSizeVertical * 12,
+          width: layoutSize.blockSizeHorizontal * 30,
+  //        width: 250,
+  //        height: 100,
+          decoration: BoxDecoration(
+            color: Colors.green,
+            border: Border.all(),
+            image: DecorationImage(
+              image: AssetImage('assets/images/noun_Parking_2313077.png'),
+            ),
+          ),
+          child: new Text(slotNumber,
+          style: TextStyle(
+              fontSize: 20.0
+            ),
           ),
         ),
-        child: new Text(slotNumber,
-        style: TextStyle(
-            fontSize: 20.0
-        ),
-      ),
       );
     }
     else {
-      return Container(
+      return GestureDetector(
+          onTap: () {
+            Flushbar(
+              title: "Parking Slot: " + slotNumber,
+              message: "Status: Occupied",
+              flushbarStyle: FlushbarStyle.FLOATING,
+              margin: EdgeInsets.all(8),
+              borderRadius: 8,
+              icon: Icon(
+                Icons.info_outline,
+                size: 28.0,
+                color: Colors.blue[300],
+              ),
+              duration: Duration(seconds: 3),
+              leftBarIndicatorColor: Colors.blue[300],
+            )..show(context);
+      },
+
+      child: Container(
         height: layoutSize.blockSizeVertical * 12,
         width: layoutSize.blockSizeHorizontal * 30,
 //        width: 250,
@@ -227,11 +348,11 @@ class ParkingSlot extends StatelessWidget {
         child: new Text(slotNumber,
           style: TextStyle(
               fontSize: 20.0
+            ),
           ),
-        ),
+        )
       );
     }
-
   }
 }
 
