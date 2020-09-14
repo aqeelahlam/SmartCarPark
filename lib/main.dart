@@ -193,14 +193,14 @@ class _FloorLayout {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
     //        ParkingSlot(true, 'A1', 'car_A'),
-              ParkingSlot(false, 'A1', 'car_A'),
+              ParkingSlot(true, 'A1', 'car_A'),
               Road(),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ParkingSlot(true, 'A2', 'car_A'),
+              ParkingSlot(false, 'A2', 'car_A'),
             //          ParkingSlot(false, 'A2', 'car_A'),
               Road(),
             ],
@@ -216,7 +216,7 @@ class _FloorLayout {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ParkingSlot(true, 'A4', 'car_A'),
+              ParkingSlot(false, 'A4', 'car_A'),
             //          ParkingSlot(false, 'A4', 'car_A'),
               Road(),
             ],
@@ -297,8 +297,6 @@ class ParkingSlot extends StatelessWidget {
         child: Container(
           height: layoutSize.blockSizeVertical * 12,
           width: layoutSize.blockSizeHorizontal * 30,
-  //        width: 250,
-  //        height: 100,
           decoration: BoxDecoration(
             color: Colors.green,
             border: Border.all(),
@@ -336,8 +334,6 @@ class ParkingSlot extends StatelessWidget {
       child: Container(
         height: layoutSize.blockSizeVertical * 12,
         width: layoutSize.blockSizeHorizontal * 30,
-//        width: 250,
-//        height: 100,
         decoration: BoxDecoration(
           color: Colors.red,
           border: Border.all(),
