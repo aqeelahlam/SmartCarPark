@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'layoutSize.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flushbar/flushbar.dart';
+import 'dart:math';
 
 void main() {
   runApp(MyApp());
@@ -123,7 +124,10 @@ class _FloorLayout {
             children: [
 //        ParkingSlot(true, 'A1', 'car_A'),
               ParkingSlot(false, 'A1', 'car_A'),
-              Road(),
+              CustomPaint(
+                painter: ShapePainter(),
+              ),
+//              Road(),
 //        ParkingSlot(false, 'B1', 'car_B'),
               ParkingSlot(true, 'B1', 'car_B'),
             ],
@@ -133,7 +137,7 @@ class _FloorLayout {
             children: [
               ParkingSlot(true, 'A2', 'car_A'),
 //          ParkingSlot(false, 'A2', 'car_A'),
-              Road(),
+//              Road(),
               ParkingSlot(true, 'B2', 'car_B'),
 //          ParkingSlot(false, 'B2', 'car_B'),
             ],
@@ -143,7 +147,7 @@ class _FloorLayout {
             children: [
               ParkingSlot(false, 'A3', 'car_A'),
 //          ParkingSlot(true, 'A3', 'car_A'),
-              Road(),
+//              Road(),
               ParkingSlot(false, 'B3', 'car_B'),
 //          ParkingSlot(true, 'B3', 'car_B'),
             ],
@@ -153,7 +157,7 @@ class _FloorLayout {
             children: [
               ParkingSlot(true, 'A4', 'car_A'),
 //          ParkingSlot(false, 'A4', 'car_A'),
-              Road(),
+//              Road(),
               ParkingSlot(false, 'B4', 'car_B'),
 //          ParkingSlot(true, 'B4', 'car_B'),
             ],
@@ -243,6 +247,53 @@ class _FloorLayout {
     return _layoutOptions.elementAt(index);
   }
 }
+
+
+
+class ShapePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()
+      ..color = Colors.white
+      ..strokeWidth = 5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+
+    var path = Path();
+
+//    var angle = (math.pi * 2) / sides;
+//
+//    Offset center = Offset(size.width / 2, size.height / 2);
+//
+//// startPoint => (100.0, 0.0)
+//    Offset startPoint = Offset(radius * math.cos(0.0), radius * math.sin(0.0));
+//
+//    path.moveTo(startPoint.dx + center.dx, startPoint.dy + center.dy);
+//
+//    for (int i = 1; i <= sides; i++) {
+//      double x = radius * math.cos(angle * i) + center.dx;
+//      double y = radius * math.sin(angle * i) + center.dy;
+//      path.lineTo(x, y);
+//    }
+//    path.close();
+
+    path.moveTo(0, 350);
+    path.lineTo(size.width, size.height / 2);
+    canvas.drawPath(path, paint);
+    path.moveTo(-250,0);
+    path.lineTo(size.width, size.height / 2);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+
+
+
 
 
 
