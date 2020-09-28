@@ -107,7 +107,7 @@ class _FloorLayout {
 //        ParkingSlot(true, 'A1', 'car_A'),
               ParkingSlot(false, 'A1', 'car_A'),
               CustomPaint(
-                painter: ShapePainter(),
+                painter: ShapePainter(1),
               ),
 //              Road(),
 //        ParkingSlot(false, 'B1', 'car_B'),
@@ -120,6 +120,9 @@ class _FloorLayout {
               ParkingSlot(true, 'A2', 'car_A'),
 //          ParkingSlot(false, 'A2', 'car_A'),
 //              Road(),
+//              CustomPaint(
+//                painter: ShapePainter(2),
+//              ),
               ParkingSlot(true, 'B2', 'car_B'),
 //          ParkingSlot(false, 'B2', 'car_B'),
             ],
@@ -130,6 +133,9 @@ class _FloorLayout {
               ParkingSlot(false, 'A3', 'car_A'),
 //          ParkingSlot(true, 'A3', 'car_A'),
 //              Road(),
+//              CustomPaint(
+//                painter: ShapePainter(3),
+//              ),
               ParkingSlot(false, 'B3', 'car_B'),
 //          ParkingSlot(true, 'B3', 'car_B'),
             ],
@@ -140,6 +146,9 @@ class _FloorLayout {
               ParkingSlot(true, 'A4', 'car_A'),
 //          ParkingSlot(false, 'A4', 'car_A'),
 //              Road(),
+//              CustomPaint(
+//                painter: ShapePainter(4),
+//              ),
               ParkingSlot(false, 'B4', 'car_B'),
 //          ParkingSlot(true, 'B4', 'car_B'),
             ],
@@ -234,6 +243,13 @@ class _FloorLayout {
 
 
 class ShapePainter extends CustomPainter {
+  int rowNumber;
+  BuildContext context;
+  ShapePainter(int rowNumber) {
+    this.rowNumber = rowNumber;
+  }
+
+
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
@@ -243,24 +259,12 @@ class ShapePainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     var path = Path();
+    var box_horizontal = layoutSize.blockSizeHorizontal * 30;
+    var box_vertical = layoutSize.blockSizeVertical * 12;
+    var vertical_length = (4 - rowNumber + 1) * box_vertical;
+    var horizontal_length = (box_horizontal * 2);
 
-//    var angle = (math.pi * 2) / sides;
-//
-//    Offset center = Offset(size.width / 2, size.height / 2);
-//
-//// startPoint => (100.0, 0.0)
-//    Offset startPoint = Offset(radius * math.cos(0.0), radius * math.sin(0.0));
-//
-//    path.moveTo(startPoint.dx + center.dx, startPoint.dy + center.dy);
-//
-//    for (int i = 1; i <= sides; i++) {
-//      double x = radius * math.cos(angle * i) + center.dx;
-//      double y = radius * math.sin(angle * i) + center.dy;
-//      path.lineTo(x, y);
-//    }
-//    path.close();
-
-    path.moveTo(0, 350);
+    path.moveTo(0, vertical_length);
     path.lineTo(size.width, size.height / 2);
     canvas.drawPath(path, paint);
     path.moveTo(-250,0);
@@ -315,6 +319,9 @@ class ParkingSlot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // if the parking slot is available
+    MediaQueryData queryData;
+    queryData = MediaQuery.of(context);
+
     if (occupied == false){
       return GestureDetector( //onclick produces flushbar with details of parking slot
           onTap: () {
@@ -332,10 +339,18 @@ class ParkingSlot extends StatelessWidget {
               duration: Duration(seconds: 3),
               leftBarIndicatorColor: Colors.blue[300],
             )..show(context);
+
+            CustomPaint(
+                painter: ShapePainter(1),
+              );
+
+
           },
         child: Container(
-          height: layoutSize.blockSizeVertical * 12,
-          width: layoutSize.blockSizeHorizontal * 30,
+//          height: queryData.size.height/6,
+//          width: queryData.size.width/4,
+        height: layoutSize.blockSizeVertical * 12,
+        width: layoutSize.blockSizeHorizontal * 30,
           decoration: BoxDecoration(
             color: Colors.green,
             border: Border.all(),
@@ -372,6 +387,8 @@ class ParkingSlot extends StatelessWidget {
       },
 
       child: Container(
+//        height: queryData.size.height/6,
+//        width: queryData.size.width/4,
         height: layoutSize.blockSizeVertical * 12,
         width: layoutSize.blockSizeHorizontal * 30,
         decoration: BoxDecoration(
@@ -417,7 +434,7 @@ class Entrance extends StatelessWidget {
         color: Colors.black54,
         border: Border.all(),
       ),
-      child: new Text('Entrance',
+      child: new Text('Entrance/Exit',
         style: TextStyle(
             fontSize: 20.0,
           color: Colors.white,
