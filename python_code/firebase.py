@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class firebase():
+class Firestore():
 
     def __init__(self):
         cred = credentials.Certificate('./fyp_credentials.json')
@@ -79,7 +79,7 @@ class firebase():
 
 
 if __name__ == '__main__':
-    firebase = firebase()
+    firebase = Firestore()
     # firebase.update_slot_status('L2_A1', True)
     df = firebase.get_all_data()
 
