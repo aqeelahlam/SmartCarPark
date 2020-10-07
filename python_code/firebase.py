@@ -10,6 +10,8 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 from datetime import datetime
 import logging
+import pandas as pd
+import json
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -42,10 +44,10 @@ class firebase():
         try:
             doc_ref = self.db.collection('slots').document(slotNumber)
 
-            doc_ref.set({
+            doc_ref.update({
                 'status': status,
                 'updated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            }, merge=True)
+            })
             logger.info('Slot {} updated'.format(slotNumber))
         except Exception as e:
             logger.info(e)
@@ -55,18 +57,36 @@ class firebase():
         try:
             doc_ref = self.db.collection('slots').document(slotNumber)
             doc = doc_ref.get().to_dict()
-            print(doc)
         except Exception as e:
             logger.info(e)
+            doc = {}
+        return doc
 
 
+    def get_all_data(self):
+        main_df = pd.DataFrame(columns=['slot', 'floor', 'status', 'updated_at'])
+        try:
+            doc_ref = self.db.collection('slots').stream()
 
-
+            for docs in doc_ref:
+                slotNumber = docs.id
+                doc = docs.to_dict()
+                data = {**{'slot': slotNumber}, **doc}
+                main_df = main_df.append(data, ignore_index=True)
+        except Exception as e:
+            logger.info(e)
+        return main_df
 
 
 if __name__ == '__main__':
     firebase = firebase()
-    firebase.update_slot_status('L1_A1', True)
+    # firebase.update_slot_status('L2_A1', True)
+    df = firebase.get_all_data()
+
+
+
+
+
 
 
 
