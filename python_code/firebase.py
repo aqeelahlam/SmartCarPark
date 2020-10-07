@@ -22,23 +22,34 @@ class firebase():
         self.default_app = firebase_admin.initialize_app(cred)
         self.db = firestore.client()
 
-    def add_new_slot(self, slotNumber, status, floor):
-        doc_ref = self.db.collection('slots').document(slotNumber)
 
-        doc_ref.set({
-            'floor': floor,
-            'status': status,
-            'created_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            'updated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        })
+    def add_new_slot(self, slotNumber, status, floor):
+        try:
+            doc_ref = self.db.collection('slots').document(slotNumber)
+
+            doc_ref.set({
+                'floor': floor,
+                'status': status,
+                'created_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                'updated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            })
+            logger.info('Slot {} added'.format(slotNumber))
+        except Exception as e:
+            logger.info(e)
+
 
     def update_slot_status(self, slotNumber, status):
-        doc_ref = self.db.collection('slots').document(slotNumber)
+        try:
+            doc_ref = self.db.collection('slots').document(slotNumber)
 
-        doc_ref.set({
-            'status': status,
-            'updated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        }, merge=True)
+            doc_ref.set({
+                'status': status,
+                'updated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }, merge=True)
+            logger.info('Slot {} updated'.format(slotNumber))
+        except Exception as e:
+            logger.info(e)
+
 
     def get_slot_data(self, slotNumber):
         try:
