@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'layoutSize.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flushbar/flushbar.dart';
-import 'dart:math';
+import 'utils/constants.dart';
+import 'widgets/Road.dart';
+import 'widgets/EmptyBox.dart';
+import 'widgets/Entrance.dart';
+import 'widgets/ParkingSlot.dart';
 
 /*
   Main script for web dashboard. Dashboard shows the parking slots available on
@@ -15,19 +18,31 @@ import 'dart:math';
 
   Created August 2020
   by Bee Khee Siang
+  Modified 8th October 2020
+  by Aqeel Ahlam Rauf
 */
 
-void main() {
-  runApp(MyApp());
-}
+/** GENERAL NOTES:
+ * 1. StatelessWidget: The State of the widget CANNOT change over time,
+ * once it has been initialized, everything inside it, including the data
+ * cannot be changed
+ *
+ * 2. StatefulWidget: The State of the widget CAN change over time.
+ */
 
+
+/// This is the first line of code that will run as we start the app
+void main() => runApp(MyApp());
+
+/// Root Widget
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /// Returning a wrapper widget
     return MaterialApp(
       title: 'Smart Car Park',
       theme: new ThemeData(scaffoldBackgroundColor: Colors.black54),
-      home: MyHomePage(title: 'Smart Car Park'),
+      home: MyHomePage(title: 'Smart Car Park'), /// This is the widget that is running on the home screen
     );
   }
 }
@@ -54,25 +69,29 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     layoutSize().init(context);
     return new Scaffold(
-        appBar: new AppBar(
+      appBar: new AppBar(
         backgroundColor: Colors.black54,
-          title: const Text('Smart Car Park',
-            style: TextStyle(
-                fontSize: 35.0
-            ),),
-    ),
-    body: new _FloorLayout()._getFloorLayout(_selectedIndex), //gets the layout of the correct floor
-    bottomNavigationBar: BottomNavigationBar( //contents of the bottom navigation bar
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.directions_car),
-          title: Text('Ground Floor', style: TextStyle(color: Colors.white)),
+        title: const Text('Smart Car Park',
+          style: TextStyle(
+              fontSize: 35.0
+          ),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.directions_car),
-          title: Text('Level 1', style: TextStyle(color: Colors.white)),
-        ),
-      ],
+      ),
+
+      /// Gets the layout of the correct floor
+      body: new _FloorLayout()._getFloorLayout(_selectedIndex),
+      /// Contents of the bottom navigation bar
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_car),
+            title: Text('Ground Floor', style: TextStyle(color: Colors.white)),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_car),
+            title: Text('Level 1', style: TextStyle(color: Colors.white)),
+          ),
+        ],
       currentIndex: _selectedIndex,
       selectedItemColor: Colors.blueAccent,
       backgroundColor: Colors.black54,
@@ -84,10 +103,85 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 class _FloorLayout {
-  // List containing the different layouts
-  static List<Card> _layoutOptions =
-    <Card>[
-      Card(
+
+  /// List containing the different layouts
+  static List<Card> _layoutOptions = <Card>[
+    /// PARKING SLOTS FOR LEVEL 1
+    Card(
+        elevation: 5,
+        margin: EdgeInsets.all(10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        color: Colors.black45,
+        child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  EmptyBox(),
+                ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+//                  EmptyBox(),
+//                  ParkingSlots('L1_A1', SIDE_A),
+                  ParkingSlot('L1_A1', SIDE_A),
+//                  CustomPaint(
+//                    painter: ShapePainter(1),
+//                  ),
+                  ParkingSlot('L1_B1', SIDE_B),
+                ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ParkingSlot('L1_A2', SIDE_A),
+//                  Road(),
+//                  CustomPaint(
+//                    painter: ShapePainter(2),
+//                  ),
+                  ParkingSlot('L1_B2', SIDE_B),
+                ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ParkingSlot('L1_A3', SIDE_A),
+                  ParkingSlot('L1_B3', SIDE_B),
+//                  ParkingSlot(false, 'A3', SIDE_A),
+//                  Road(),
+//                  CustomPaint(
+//                    painter: ShapePainter(3),
+//                  ),
+//                  ParkingSlot(false, 'B3', SIDE_B),
+                ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ParkingSlot('L1_A4', SIDE_A),
+                  ParkingSlot('L1_B4', SIDE_B),
+//                  ParkingSlot(true, 'A4', SIDE_A),
+//                  Road(),
+//                  CustomPaint(
+//                    painter: ShapePainter(4),
+//                  ),
+//                  ParkingSlot(false, 'B4', SIDE_B),
+                ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  EmptyBox(),
+                ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Entrance(),
+                ],)
+        ]
+      )
+    ),
+
+    /// PARKING SLOTS FOR LEVEL 2
+    Card(
         elevation: 5,
         margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(
@@ -99,143 +193,50 @@ class _FloorLayout {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               EmptyBox(),
-            ],
-          ),
+            ],),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-//        ParkingSlot(true, 'A1', 'car_A'),
-              ParkingSlot(false, 'A1', 'car_A'),
-              CustomPaint(
-                painter: ShapePainter(1),
-              ),
-//              Road(),
-//        ParkingSlot(false, 'B1', 'car_B'),
-              ParkingSlot(true, 'B1', 'car_B'),
-            ],
-          ),
+              ParkingSlot('L2_A1', SIDE_A),
+              Road(),
+            ],),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ParkingSlot(true, 'A2', 'car_A'),
-//          ParkingSlot(false, 'A2', 'car_A'),
-//              Road(),
-//              CustomPaint(
-//                painter: ShapePainter(2),
-//              ),
-              ParkingSlot(true, 'B2', 'car_B'),
-//          ParkingSlot(false, 'B2', 'car_B'),
-            ],
-          ),
+              ParkingSlot('L2_A2', SIDE_A),
+              Road(),
+            ],),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ParkingSlot(false, 'A3', 'car_A'),
-//          ParkingSlot(true, 'A3', 'car_A'),
-//              Road(),
-//              CustomPaint(
-//                painter: ShapePainter(3),
-//              ),
-              ParkingSlot(false, 'B3', 'car_B'),
-//          ParkingSlot(true, 'B3', 'car_B'),
-            ],
-          ),
+              ParkingSlot('L2_A3', SIDE_A),
+              Road(),
+            ],),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ParkingSlot(true, 'A4', 'car_A'),
-//          ParkingSlot(false, 'A4', 'car_A'),
-//              Road(),
-//              CustomPaint(
-//                painter: ShapePainter(4),
-//              ),
-              ParkingSlot(false, 'B4', 'car_B'),
-//          ParkingSlot(true, 'B4', 'car_B'),
-            ],
-          ),
+              ParkingSlot('L2_A4', SIDE_A),
+              Road(),
+            ],),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               EmptyBox(),
-            ],
-          ),
+            ],),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Entrance(),
-            ],
-          )
-
+            ],)
         ]
-      )
-    ),
-
-      Card(
-        elevation: 5,
-        margin: EdgeInsets.all(10),
-        shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        ),
-        color: Colors.black45,
-        child: Column(children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              EmptyBox(),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-    //        ParkingSlot(true, 'A1', 'car_A'),
-              ParkingSlot(true, 'A1', 'car_A'),
-              Road(),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ParkingSlot(false, 'A2', 'car_A'),
-            //          ParkingSlot(false, 'A2', 'car_A'),
-              Road(),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ParkingSlot(false, 'A3', 'car_A'),
-            //          ParkingSlot(true, 'A3', 'car_A'),
-              Road(),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ParkingSlot(false, 'A4', 'car_A'),
-            //          ParkingSlot(false, 'A4', 'car_A'),
-              Road(),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              EmptyBox(),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Entrance(),
-            ],
-          )
-
-        ]
-      )
+        )
     ),
   ];
 
+/// This Function is used to return the layout index (CARD index)
+/// Each Card holds the slots for one level of parking
   Card _getFloorLayout(int index) {
-    // function that returns the layout
+    /// Function that returns the layout (CARD INDEX)
     return _layoutOptions.elementAt(index);
   }
 }
@@ -275,172 +276,6 @@ class ShapePainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
-  }
-}
-
-
-
-
-
-
-
-class Road extends StatelessWidget {
-  // StatelessWidget of the road
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-//      height: layoutSize.blockSizeVertical * 12,
-//      width: layoutSize.blockSizeHorizontal * 13,
-    height: 100,
-    width: 100,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/images/road.png'),
-            fit: BoxFit.fill,),
-        ),
-      );
-  }
-
-}
-
-
-class ParkingSlot extends StatelessWidget {
-  // StatelessWidget of the Parking slot
-  bool occupied;
-  String slotNumber;
-  String rowNumber;
-
-  // Constructor of a parking slot
-  ParkingSlot(bool occupied, slotNumber, rowNumber) {
-    this.occupied = occupied;
-    this.slotNumber = slotNumber;
-    this.rowNumber = rowNumber;
-  }
-  @override
-  Widget build(BuildContext context) {
-    // if the parking slot is available
-    MediaQueryData queryData;
-    queryData = MediaQuery.of(context);
-
-    if (occupied == false){
-      return GestureDetector( //onclick produces flushbar with details of parking slot
-          onTap: () {
-            Flushbar(
-              title: "Parking Slot: " + slotNumber,
-              message: "Status: Available",
-              flushbarStyle: FlushbarStyle.FLOATING,
-              margin: EdgeInsets.all(8),
-              borderRadius: 8,
-              icon: Icon(
-                Icons.info_outline,
-                size: 28.0,
-                color: Colors.blue[300],
-              ),
-              duration: Duration(seconds: 3),
-              leftBarIndicatorColor: Colors.blue[300],
-            )..show(context);
-
-            CustomPaint(
-                painter: ShapePainter(1),
-              );
-
-
-          },
-        child: Container(
-//          height: queryData.size.height/6,
-//          width: queryData.size.width/4,
-        height: layoutSize.blockSizeVertical * 12,
-        width: layoutSize.blockSizeHorizontal * 30,
-          decoration: BoxDecoration(
-            color: Colors.green,
-            border: Border.all(),
-            image: DecorationImage(
-              image: AssetImage('assets/images/noun_Parking_2313077.png'),
-            ),
-          ),
-          child: new Text(slotNumber,
-          style: TextStyle(
-              fontSize: 20.0
-            ),
-          ),
-        ),
-      );
-    }
-    else {
-      // if the parking slot is occupied
-      return GestureDetector(
-          onTap: () {
-            Flushbar(
-              title: "Parking Slot: " + slotNumber,
-              message: "Status: Occupied",
-              flushbarStyle: FlushbarStyle.FLOATING,
-              margin: EdgeInsets.all(8),
-              borderRadius: 8,
-              icon: Icon(
-                Icons.info_outline,
-                size: 28.0,
-                color: Colors.blue[300],
-              ),
-              duration: Duration(seconds: 3),
-              leftBarIndicatorColor: Colors.blue[300],
-            )..show(context);
-      },
-
-      child: Container(
-//        height: queryData.size.height/6,
-//        width: queryData.size.width/4,
-        height: layoutSize.blockSizeVertical * 12,
-        width: layoutSize.blockSizeHorizontal * 30,
-        decoration: BoxDecoration(
-          color: Colors.red,
-          border: Border.all(),
-          image: DecorationImage(
-          image: AssetImage('assets/images/' + rowNumber + '.png'),
-          ),
-        ),
-        child: new Text(slotNumber,
-          style: TextStyle(
-              fontSize: 20.0
-            ),
-          ),
-        )
-      );
-    }
-  }
-}
-
-
-class EmptyBox extends StatelessWidget {
-  // StatelessWidget of an empty box. Used to fill up spaces for alignment purposes
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 109,
-      height: 50,
-      alignment: Alignment(0.0, -0.1),
-    );
-  }
-}
-
-class Entrance extends StatelessWidget {
-  // StatelessWidget of the entrance
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: layoutSize.blockSizeVertical * 8,
-      width: layoutSize.blockSizeHorizontal * 25,
-      alignment: Alignment(0.0, -0.1),
-      decoration: BoxDecoration(
-        color: Colors.black54,
-        border: Border.all(),
-      ),
-      child: new Text('Entrance/Exit',
-        style: TextStyle(
-            fontSize: 20.0,
-          color: Colors.white,
-        ),
-      ),
-    );
   }
 }
 
