@@ -32,8 +32,12 @@ dependencies:
   cloud_firestore: ^0.14.1+3
 
 dev_dependencies:
-  flutter_test:
+  flutter_test:  # for widget testing
     sdk: flutter
+  flutter_driver:  # for integration testing
+    sdk: flutter
+  test: ^1.14.4  # for unit testing
+  mockito: ^4.1.2  # mocking
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
