@@ -21,7 +21,16 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def get_updates(L1_A, L1_B, L2):
+def get_updates():
+    L2 = serial.Serial("/dev/ttyACM0")
+    L2.baudrate = 9600
+
+    L1_A = serial.Serial("/dev/ttyACM1")
+    L1_A.baudrate = 9600
+
+    L1_B = serial.Serial("/dev/ttyACM2")
+    L1_B.baudrate = 9600
+    
     L1_A_list = []
     L1_B_list = []
     L2_list = []
@@ -48,30 +57,33 @@ def get_updates(L1_A, L1_B, L2):
     
     
 def main():
-    L2 = serial.Serial("/dev/ttyACM0")
-    L2.baudrate = 9600
-
-    L1_A = serial.Serial("/dev/ttyACM1")
-    L1_A.baudrate = 9600
-
-    L1_B = serial.Serial("/dev/ttyACM2")
-    L1_B.baudrate = 9600
-    
     firebase = Firestore_db()
     main_df = firebase.get_all_data()
     main_df = main_df[['slot', 'status']]
+    counter = 0
+    max = 10
     
-    updated_df = get_updates(L1_A, L1_B, L2)
+    while counter <= max:
+        logger.info(counter)
     
-    logger.info('Checking for updates')
-    merged = pd.merge(main_df, updated_df, on='slot')
-    updates = merged[merged['status'].astype(str) != merged['updated_status'].astype(str)]
-    
-    if not updates.empty:
-        logger.info('Number of slots to update: ' + str(len(updates)))
-        for index, row in updates.iterrows():
-            firebase.update_slot_status(row['slot'], row['updated_status'])
-        logger.info('All slots updated')
+        updated_df = get_updates()
+        logger.info(updated_df)
+
+        
+        logger.info('Checking for updates')
+        merged = pd.merge(main_df, updated_df, on='slot')
+        updates = merged[merged['status'].astype(str) != merged['updated_status'].astype(str)]
+        
+        if not updates.empty:
+            logger.info('Number of slots to update: ' + str(len(updates)))
+            for index, row in updates.iterrows():
+                firebase.update_slot_status(row['slot'], row['updated_status'])
+                main_df.loc[index]['status'] = row['updated_status']
+            logger.info('All slots updated')
+            logger.info(main_df)
+        
+        time.sleep(10)
+        counter += 1
     
     
     
