@@ -20,12 +20,23 @@ logger = logging.getLogger(__name__)
 class Firestore_db():
 
     def __init__(self):
+        """
+        Initialization function
+        return:
+        """
         cred = credentials.Certificate('./fyp_credentials.json')
         self.default_app = firebase_admin.initialize_app(cred)
         self.db = firestore.client()
 
 
     def add_new_slot(self, slotNumber, status, floor):
+        """
+        Function that adds a new parking slot to the database
+        :param (String)slotNumber: the slot number
+        :param (bool)status: the status
+        :param (int)floor: the floor
+        return:
+        """
         try:
             doc_ref = self.db.collection('slots').document(slotNumber)
 
@@ -41,6 +52,12 @@ class Firestore_db():
 
 
     def update_slot_status(self, slotNumber, status):
+        """
+        Function that updates the database with the status of the slot
+        :param (String)slotNumber: the slot number
+        :param (bool)status: the status of the slot
+        return:
+        """
         try:
             doc_ref = self.db.collection('slots').document(slotNumber)
 
@@ -54,6 +71,11 @@ class Firestore_db():
 
 
     def get_slot_data(self, slotNumber):
+        """
+        Function that pulls the data of a single slot in the db
+        :param (String)slotNumber: the slot number
+        return: slot data in json format
+        """
         try:
             doc_ref = self.db.collection('slots').document(slotNumber)
             doc = doc_ref.get().to_dict()
@@ -64,6 +86,10 @@ class Firestore_db():
 
 
     def get_all_data(self):
+        """
+        Function that pulls all the data in the database
+        return: a dataframe of all the data in the database
+        """
         main_df = pd.DataFrame(columns=['slot', 'floor', 'status', 'updated_at'])
         try:
             doc_ref = self.db.collection('slots').stream()
