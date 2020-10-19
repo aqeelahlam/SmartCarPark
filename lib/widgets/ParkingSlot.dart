@@ -16,15 +16,18 @@ import '../main.dart';
 /// by Aqeel Ahlam Rauf
 ///
 class ParkingSlot extends StatefulWidget {
+
   // StatelessWidget of the Parking slot
   String slotNumber;
   String rowNumber;
 
   // Constructor of a parking slot
-  ParkingSlot(slotNumber, rowNumber) {
-    this.slotNumber = slotNumber;
-    this.rowNumber = rowNumber;
-  }
+  //ParkingSlot(this.slotNumber, this.rowNumber);
+  ParkingSlot({
+    Key key,
+    @required this.slotNumber,
+    @required this.rowNumber})
+      : super(key: key);
 
   @override
   _ParkingSlotState createState() => _ParkingSlotState();
@@ -68,8 +71,10 @@ class _ParkingSlotState extends State<ParkingSlot> {
     if (current_status == false) {
       // if the parking slot is occupied
       return GestureDetector( //onclick produces flushbar with details of parking slot
+        key: Key('flushbar' + widget.slotNumber),
         onTap: () {
           Flushbar(
+            //key: Key('flushbar' + widget.slotNumber),
             title: "Parking Slot: " + widget.slotNumber,
             message: "Status: Available",
             flushbarStyle: FlushbarStyle.FLOATING,

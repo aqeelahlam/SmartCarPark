@@ -6,11 +6,12 @@ import 'package:myapp/main.dart';
 
 void main() {
   group('Widgets Exist Test', () {
+    // test that title of page appears
     testWidgets('Finds title', (WidgetTester tester) async {
       await tester.pumpWidget(MyApp());
       expect(find.text('Smart Car Park'), findsOneWidget);
     });
-
+    // test that default state is level 1, and all parking slots appear
     testWidgets('Finds level 1 slots', (WidgetTester tester) async {
       await tester.pumpWidget(MyApp());
       expect(find.text('L1_A1'), findsOneWidget);
@@ -23,12 +24,13 @@ void main() {
       expect(find.text('L1_B4'), findsOneWidget);
     });
 
-    //test for level 2, need not private method
+    //test for level 2
 
+    // test that bottom navigation bar appears with the 2 "buttons"
     testWidgets('Finds bottom navigation bar', (WidgetTester tester) async {
       await tester.pumpWidget(MyApp());
-      expect(find.text('Ground Floor'), findsOneWidget);
       expect(find.text('Level 1'), findsOneWidget);
+      expect(find.text('Level 2'), findsOneWidget);
     });
   });
 
