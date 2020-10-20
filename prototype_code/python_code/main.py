@@ -24,6 +24,9 @@ logger = logging.getLogger(__name__)
 def get_updates(L1_A, L1_B, L2):
     """
     Function that gets the status of each parking slot in the prototype
+    :param L1_A: serial monitor for L1_A
+    :param L1_B: serial monitor for L1_B
+    :param L2: serial monitor for L2
     return: dataframe of all parking slots and their current status 
     """
     L1_A.flushInput()
