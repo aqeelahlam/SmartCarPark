@@ -96,7 +96,7 @@ void setup() {
   pinMode(trigPin4, OUTPUT);
   pinMode(echoPin4, INPUT);  
   // Ultrasonic Sensor for the Gate
-  pinMode(trigPin8, OUTPUT);
+  pinMode(trigPinG, OUTPUT);
   pinMode(echoPinG, INPUT);  
 
   servo_entrance.attach(10);  // Attach pin 10 Arduino to signal pin of servo    
