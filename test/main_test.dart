@@ -5,12 +5,12 @@ import 'package:myapp/main.dart';
 
 void main() {
   group('Widgets Exist Test', () {
-    // title of page appears
+    // test that title of page appears
     testWidgets('Finds title', (WidgetTester tester) async {
       await tester.pumpWidget(MyApp());
       expect(find.text('Smart Car Park'), findsOneWidget);
     });
-    // default state is level 1, and all parking slots appear
+    // test that default state is level 1, and all parking slots appear
     testWidgets('Finds level 1 slots', (WidgetTester tester) async {
       await tester.pumpWidget(MyApp());
       expect(find.text('L1_A1'), findsOneWidget);
@@ -32,6 +32,7 @@ void main() {
   });
 
   group('Bottom Navigation Bar Test', () {
+    // test that floor changes when corresponding button is pressed
     testWidgets('Changes to level 2', (WidgetTester tester) async {
       await tester.pumpWidget(MyApp());
       // we are in level 1 by default

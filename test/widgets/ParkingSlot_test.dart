@@ -15,4 +15,35 @@ void main () {
   });*/
 
   // https://pub.dev/packages/cloud_firestore_mocks/install
+
+  // methods for ParkingSlot.dart if you want to test checkStatus method
+/*  void setStatus(String slotNum) {
+
+    bool status = CheckStatus().getStatus(slotNum);
+    if (this.mounted) {
+      setState(() {
+        // update status of parking slot
+        current_status = status;
+      });
+    }
+  }
+
+  class CheckStatus {
+
+  bool getStatus(slotNumber) {
+  bool status;
+  // get the document related to this parking slot
+  FirebaseFirestore.instance
+      .collection('slots')
+      .doc(slotNumber)
+      .get()
+      .then((doc) {
+  // get the status
+  status = doc.data()['status'];
+  });
+  return status;
+  }
+
+  }*/
+
 }
