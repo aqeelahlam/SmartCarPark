@@ -21,20 +21,14 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def get_updates():
+def get_updates(L1_A, L1_B, L2):
     """
     Function that gets the status of each parking slot in the prototype
     return: dataframe of all parking slots and their current status 
     """
-    L2 = serial.Serial("/dev/ttyACM0")
-    L2.baudrate = 9600
-
-    L1_A = serial.Serial("/dev/ttyACM1")
-    L1_A.baudrate = 9600
-
-    L1_B = serial.Serial("/dev/ttyACM2")
-    L1_B.baudrate = 9600
-    
+    L1_A.flushInput()
+    L1_B.flushInput()
+    L2.flushInput()
     L1_A_list = []
     L1_B_list = []
     L2_list = []
@@ -56,6 +50,7 @@ def get_updates():
             temp_list[1] = False
         final_list.append(temp_list)
         
+        
     # Putting everything into a dataframe
     df = pd.DataFrame(final_list, columns=['slot', 'updated_status'])
     return df
@@ -67,6 +62,15 @@ def main(max_loop):
     :param (int)max_loop: number of times to loop 
     return: 
     """
+    L2 = serial.Serial("/dev/ttyACM1")
+    L2.baudrate = 9600
+
+    L1_A = serial.Serial("/dev/ttyACM0")
+    L1_A.baudrate = 9600
+
+    L1_B = serial.Serial("/dev/ttyACM2")
+    L1_B.baudrate = 9600
+    
     # Gets the current version or the database
     firebase = Firestore_db()
     main_df = firebase.get_all_data()
@@ -75,7 +79,7 @@ def main(max_loop):
     
     # Loop
     while counter <= max_loop:
-        updated_df = get_updates()
+        updated_df = get_updates(L1_A, L1_B, L2)
         
         logger.info('Checking for updates')
         # Merging both dataframes
@@ -99,7 +103,7 @@ def main(max_loop):
     
     
 if __name__ == '__main__':
-    main(10)
+    main(25)
     
 
 
