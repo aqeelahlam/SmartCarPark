@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import '../layoutSize.dart';
 
 /// This is a Stateless widget used to draw the road Image on
 /// the User Interface.
@@ -12,10 +13,10 @@ class Road extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-//      height: layoutSize.blockSizeVertical * 12,
-//      width: layoutSize.blockSizeHorizontal * 13,
-      height: 100,
-      width: 100,
+     height: layoutSize.blockSizeVertical * 12,
+     width: layoutSize.blockSizeHorizontal * 13,
+//       height: 80,
+//       width: 100,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/road.png'),
