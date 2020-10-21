@@ -6,6 +6,8 @@ import 'widgets/Road.dart';
 import 'widgets/EmptyBox.dart';
 import 'widgets/Entrance.dart';
 import 'widgets/ParkingSlot.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 /*
   Main script for web dashboard. Dashboard shows the parking slots available on
@@ -32,7 +34,13 @@ import 'widgets/ParkingSlot.dart';
 
 
 /// This is the first line of code that will run as we start the app
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 /// Root Widget
 class MyApp extends StatelessWidget {
