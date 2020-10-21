@@ -34,8 +34,11 @@ dependencies:
 
 
 dev_dependencies:
-  flutter_test:
+  flutter_test:  # for widget testing
     sdk: flutter
+  flutter_driver:  # for integration testinng
+    sdk: flutter
+  test: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

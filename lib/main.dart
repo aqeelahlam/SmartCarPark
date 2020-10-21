@@ -93,11 +93,15 @@ class _MyHomePageState extends State<MyHomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.directions_car),
-            title: Text('Ground Floor', style: TextStyle(color: Colors.white)),
+            title: Text('Level 1',
+                key: Key('level1'),
+                style: TextStyle(color: Colors.white)),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.directions_car),
-            title: Text('Level 1', style: TextStyle(color: Colors.white)),
+            title: Text('Level 2',
+                key: Key('level2'),
+                style: TextStyle(color: Colors.white)),
           ),
         ],
       currentIndex: _selectedIndex,
@@ -134,27 +138,40 @@ class _FloorLayout {
                 children: [
 //                  EmptyBox(),
 //                  ParkingSlots('L1_A1', SIDE_A),
-                  ParkingSlot('L1_A1', SIDE_A),
+                  //ParkingSlot('L1_A1', SIDE_A),
+                  ParkingSlot(key: Key('L1A1'),
+                              slotNumber: 'L1_A1',
+                              rowNumber: SIDE_A),
 //                  CustomPaint(
 //                    painter: ShapePainter(1),
 //                  ),
-                  ParkingSlot('L1_B1', SIDE_B),
+                  ParkingSlot(key: Key('L1B1'),
+                      slotNumber: 'L1_B1',
+                      rowNumber: SIDE_B),
                 ],),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ParkingSlot('L1_A2', SIDE_A),
+                  ParkingSlot(key: Key('L1A2'),
+                      slotNumber: 'L1_A2',
+                      rowNumber: SIDE_A),
 //                  Road(),
 //                  CustomPaint(
 //                    painter: ShapePainter(2),
 //                  ),
-                  ParkingSlot('L1_B2', SIDE_B),
+                  ParkingSlot(key: Key('L1B2'),
+                      slotNumber: 'L1_B2',
+                      rowNumber: SIDE_B),
                 ],),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ParkingSlot('L1_A3', SIDE_A),
-                  ParkingSlot('L1_B3', SIDE_B),
+                  ParkingSlot(key: Key('L1A3'),
+                      slotNumber: 'L1_A3',
+                      rowNumber: SIDE_A),
+                  ParkingSlot(key: Key('L1B3'),
+                      slotNumber: 'L1_B3',
+                      rowNumber: SIDE_B),
 //                  ParkingSlot(false, 'A3', SIDE_A),
 //                  Road(),
 //                  CustomPaint(
@@ -165,8 +182,12 @@ class _FloorLayout {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ParkingSlot('L1_A4', SIDE_A),
-                  ParkingSlot('L1_B4', SIDE_B),
+                  ParkingSlot(key: Key('L1A4'),
+                      slotNumber: 'L1_A4',
+                      rowNumber: SIDE_A),
+                  ParkingSlot(key: Key('L1B4'),
+                      slotNumber: 'L1_B4',
+                      rowNumber: SIDE_B),
 //                  ParkingSlot(true, 'A4', SIDE_A),
 //                  Road(),
 //                  CustomPaint(
@@ -205,25 +226,33 @@ class _FloorLayout {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ParkingSlot('L2_A1', SIDE_A),
+              ParkingSlot(key: Key('L2A1'),
+                  slotNumber: 'L2_A1',
+                  rowNumber: SIDE_A),
               Road(),
             ],),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ParkingSlot('L2_A2', SIDE_A),
+              ParkingSlot(key: Key('L2A2'),
+                  slotNumber: 'L2_A2',
+                  rowNumber: SIDE_A),
               Road(),
             ],),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ParkingSlot('L2_A3', SIDE_A),
+              ParkingSlot(key: Key('L2A3'),
+                  slotNumber: 'L2_A3',
+                  rowNumber: SIDE_A),
               Road(),
             ],),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ParkingSlot('L2_A4', SIDE_A),
+              ParkingSlot(key: Key('L2A4'),
+                  slotNumber: 'L2_A4',
+                  rowNumber: SIDE_A),
               Road(),
             ],),
           Row(

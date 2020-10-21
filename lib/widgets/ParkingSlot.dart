@@ -16,15 +16,17 @@ import '../main.dart';
 /// by Aqeel Ahlam Rauf
 ///
 class ParkingSlot extends StatefulWidget {
+
   // StatelessWidget of the Parking slot
   String slotNumber;
   String rowNumber;
 
   // Constructor of a parking slot
-  ParkingSlot(slotNumber, rowNumber) {
-    this.slotNumber = slotNumber;
-    this.rowNumber = rowNumber;
-  }
+  ParkingSlot({
+    Key key,
+    @required this.slotNumber,
+    @required this.rowNumber})
+      : super(key: key);
 
   @override
   _ParkingSlotState createState() => _ParkingSlotState();
@@ -32,25 +34,20 @@ class ParkingSlot extends StatefulWidget {
 
 class _ParkingSlotState extends State<ParkingSlot> {
 
-  bool current_status;
-  Slots slot;
-  Slots finalOne;
-  List documents;
+  bool currentStatus;
 
-  Slots check_status(String slotNum) {
+  void checkStatus(String slotNum) {
 
-    CollectionReference slots = Firestore.instance.collection('slots');
-    slots.getDocuments().then((snapshot) {
-      snapshot.documents.forEach((doc) {
-        if (doc.documentID == slotNum) {
-          setState(() {
-            current_status = doc.data()['status'];
-          });
-//          slot.status = doc.data()['status'];
-//          current_status = doc.data()['status'];
-//          print(current_status);
-        }
-      });
+    // get the Firestore collection
+    CollectionReference slots = FirebaseFirestore.instance.collection('slots');
+    // get the document related to this parking slot
+    slots.doc(slotNum).get().then((doc) {
+      if (this.mounted) {
+        setState(() {
+          // update status of parking slot
+          currentStatus = doc.data()['status'];
+        });
+      }
     });
   }
 
@@ -62,14 +59,16 @@ class _ParkingSlotState extends State<ParkingSlot> {
     queryData = MediaQuery.of(context);
 //    print(check_status(widget.slotNumber));
 //    print(widget.slotNumber);
-//    finalOne = check_status(widget.slotNumber);
-//    print(current_status);
+    checkStatus(widget.slotNumber);
+//    print(currentStatus);
 
-    if (current_status == false) {
-      // if the parking slot is occupied
+    if (currentStatus == false) {
+      // if the parking slot is available
       return GestureDetector( //onclick produces flushbar with details of parking slot
+        //key: Key("flushbar" + widget.slotNumber),
         onTap: () {
           Flushbar(
+            //key: Key('flushbar' + widget.slotNumber),
             title: "Parking Slot: " + widget.slotNumber,
             message: "Status: Available",
             flushbarStyle: FlushbarStyle.FLOATING,
@@ -111,6 +110,7 @@ class _ParkingSlotState extends State<ParkingSlot> {
     }
 
     else {
+      // if the parking slot is occupied
       return GestureDetector(
           onTap: () {
             Flushbar(
