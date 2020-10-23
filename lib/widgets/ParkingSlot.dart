@@ -35,18 +35,27 @@ class ParkingSlot extends StatefulWidget {
 class _ParkingSlotState extends State<ParkingSlot> {
 
   bool currentStatus;
+  //int counter = 0; // used for checking number of reads to firebase
+
+  @override
+  void initState() {
+    checkStatus(widget.slotNumber);  // check slot status from firebase
+    super.initState();
+  }
 
   void checkStatus(String slotNum) {
-
-    // get the Firestore collection
-    CollectionReference slots = FirebaseFirestore.instance.collection('slots');
-    // get the document related to this parking slot
-    slots.doc(slotNum).get().then((doc) {
+    // initialises a stream that listens for changes in data from Firebase document
+    Stream<DocumentSnapshot> documentStream = FirebaseFirestore.instance
+        .collection('slots')
+        .doc(slotNum)
+        .snapshots();
+    documentStream.listen((snapshot) {
       if (this.mounted) {
         setState(() {
-          // update status of parking slot
-          currentStatus = doc.data()['status'];
+          currentStatus = snapshot.data()['status'];
+          //counter += 1;
         });
+        //print(DateTime.now().toString() + ': ' + widget.slotNumber + ': ' + counter.toString());
       }
     });
   }
@@ -57,10 +66,6 @@ class _ParkingSlotState extends State<ParkingSlot> {
     // if the parking slot is available
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
-//    print(check_status(widget.slotNumber));
-//    print(widget.slotNumber);
-    checkStatus(widget.slotNumber);
-//    print(currentStatus);
 
     if (currentStatus == false) {
       // if the parking slot is available
