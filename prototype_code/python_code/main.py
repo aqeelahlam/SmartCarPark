@@ -29,6 +29,7 @@ def get_updates(L1_A, L1_B, L2):
     :param L2: serial monitor for L2
     return: dataframe of all parking slots and their current status 
     """
+    # Flushes the previous data from Arduinos, so that old data don't get mixed with the latest data
     L1_A.flushInput()
     L1_B.flushInput()
     L2.flushInput()
@@ -46,12 +47,15 @@ def get_updates(L1_A, L1_B, L2):
     final_list = []
     logger.info('Cleaning Arduino data')
     for slot in main_list:
-        temp_list = slot.decode().strip().split(";")
-        if temp_list[1] == 'True':
-            temp_list[1] = True
-        else:
-            temp_list[1] = False
-        final_list.append(temp_list)
+        try:
+            temp_list = slot.decode().strip().split(";")
+            if temp_list[1] == 'True':
+                temp_list[1] = True
+            else:
+                temp_list[1] = False
+            final_list.append(temp_list)
+        except Exception as e:
+            logger.info(e)
         
         
     # Putting everything into a dataframe
@@ -90,8 +94,10 @@ def main(max_loop):
         # Checking for differences in status
         updates = merged[merged['status'].astype(str) != merged['updated_status'].astype(str)]
         
+        # If there are updates
         if not updates.empty:
             logger.info('Number of slots to update: ' + str(len(updates)))
+            # For each row
             for index, row in updates.iterrows():
                 firebase.update_slot_status(row['slot'], row['updated_status'])
 
