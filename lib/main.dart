@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'layoutSize.dart';
+import 'layout_size.dart';
 import 'package:flutter/widgets.dart';
 import 'utils/constants.dart';
-import 'widgets/Information.dart';
-import 'widgets/EmptyBox.dart';
-import 'widgets/Entrance.dart';
-import 'widgets/ParkingSlot.dart';
+import 'widgets/information.dart';
+import 'widgets/entrance.dart';
+import 'widgets/parking_slot.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 
@@ -20,8 +19,10 @@ import 'package:firebase_core/firebase_core.dart';
 
   Created August 2020
   by Bee Khee Siang
-  Modified 8th October 2020
+  Modified October 2020
   by Aqeel Ahlam Rauf
+  Modified October 2020
+  by Wan Ru Thang
 */
 
 /** GENERAL NOTES:
@@ -33,25 +34,23 @@ import 'package:firebase_core/firebase_core.dart';
  */
 
 
-/// This is the first line of code that will run as we start the app
-//void main() => runApp(MyApp());
-
+/// This is the first line of code that will run as we start the app.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
 
-/// Root Widget
+/// Root Widget.
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /// Returning a wrapper widget
+    /// Returns a wrapper widget.
     return MaterialApp(
       title: 'Smart Car Park',
-//      theme: new ThemeData(scaffoldBackgroundColor: Colors.black54, brightness: Brightness.light),
       theme: new ThemeData(scaffoldBackgroundColor: Colors.blueGrey, brightness: Brightness.light),
-      home: MyHomePage(title: 'Smart Car Park'), /// This is the widget that is running on the home screen
+      /// This is the widget that is running on the home screen.
+      home: MyHomePage(title: 'Smart Car Park'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -60,6 +59,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
+  /// Title of page.
   final String title;
 
   @override
@@ -67,8 +67,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  /// Current floor.
   int _selectedIndex = 0;
 
+  /// Changes the current floor.
   void _onFloorTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -78,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    layoutSize().init(context);
+    LayoutSize().init(context);
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
@@ -90,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
 
-      /// Gets the layout of the correct floor
+      /// Gets the layout of the correct floor.
       body: new _FloorLayout()._getFloorLayout(_selectedIndex),
       /// Contents of the bottom navigation bar
       bottomNavigationBar: BottomNavigationBar(
@@ -120,9 +122,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class _FloorLayout {
 
-  /// List containing the different layouts
+  /// List containing the different layouts.
   static List<Card> _layoutOptions = <Card>[
-    /// PARKING SLOTS FOR LEVEL 1
+    /// PARKING SLOTS FOR LEVEL 1.
     Card(
         elevation: 5,
         margin: EdgeInsets.all(10),
@@ -140,7 +142,6 @@ class _FloorLayout {
                       padding: const EdgeInsets.all(PADDING),
                       child: Entrance('↑ To Level 2', 4),
                     ),
-//                    Entrance('Level 1', 4),
                     Padding(
                       padding: const EdgeInsets.all(PADDING),
                       child: Entrance('↗ Mall Entrance', 4),
@@ -153,13 +154,13 @@ class _FloorLayout {
                       padding: EdgeInsets.all(PADDING),
                       child: ParkingSlot(key: Key('L1A1'),
                                 slotNumber: 'L1_A1',
-                                rowNumber: SIDE_A),
+                                iconPath: SIDE_A),
                     ),
                      Padding(
                        padding: EdgeInsets.all(PADDING),
                        child: ParkingSlot(key: Key('L1B1'),
                         slotNumber: 'L1_B1',
-                        rowNumber: SIDE_B),
+                        iconPath: SIDE_B),
                      ),
                   ],),
                 Row(
@@ -169,13 +170,13 @@ class _FloorLayout {
                       padding: const EdgeInsets.all(PADDING),
                       child: ParkingSlot(key: Key('L1A2'),
                           slotNumber: 'L1_A2',
-                          rowNumber: SIDE_A),
+                          iconPath: SIDE_A),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(PADDING),
                       child: ParkingSlot(key: Key('L1B2'),
                           slotNumber: 'L1_B2',
-                          rowNumber: SIDE_B),
+                          iconPath: SIDE_B),
                     ),
                   ],),
                 Row(
@@ -185,13 +186,13 @@ class _FloorLayout {
                       padding: const EdgeInsets.all(PADDING),
                       child: ParkingSlot(key: Key('L1A3'),
                           slotNumber: 'L1_A3',
-                          rowNumber: SIDE_A),
+                          iconPath: SIDE_A),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(PADDING),
                       child: ParkingSlot(key: Key('L1B3'),
                           slotNumber: 'L1_B3',
-                          rowNumber: SIDE_B),
+                          iconPath: SIDE_B),
                     ),
                   ],),
                 Row(
@@ -201,34 +202,31 @@ class _FloorLayout {
                       padding: const EdgeInsets.all(PADDING),
                       child: ParkingSlot(key: Key('L1A4'),
                           slotNumber: 'L1_A4',
-                          rowNumber: SIDE_A),
+                          iconPath: SIDE_A),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(PADDING),
                       child: ParkingSlot(key: Key('L1B4'),
                           slotNumber: 'L1_B4',
-                          rowNumber: SIDE_B),
+                          iconPath: SIDE_B),
                     ),
                   ],),
-  //              Row(
-  //                mainAxisAlignment: MainAxisAlignment.center,
-  //                children: [
-  //                  EmptyBox(),
-  //                ],),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Entrance('↑ Entrance - Exit ↓', 5),
                   ],),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                        padding: const EdgeInsets.all(PADDING),
-                        child: Entrance('Nearest Parking:', 10),
-                      ),
-                    Information('Occupied', 'car_A'),
-                    Information('Free', 'noun_Parking_2313077'),
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: Information('Occupied', 'car_A'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: Information('Free', 'noun_Parking_2313077'),
+                    ),
                   ],
                 )
               ]
@@ -236,7 +234,7 @@ class _FloorLayout {
         )
     ),
 
-    /// PARKING SLOTS FOR LEVEL 2
+    /// PARKING SLOTS FOR LEVEL 2.
     Card(
         elevation: 5,
         margin: EdgeInsets.all(10),
@@ -251,9 +249,8 @@ class _FloorLayout {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 4),
+                  child: Entrance(' ', 4),
                 ),
-//                Entrance('Level 2', 4),
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
                   child: Entrance('↗ Mall Entrance', 4),
@@ -266,11 +263,11 @@ class _FloorLayout {
                   padding: const EdgeInsets.all(PADDING),
                   child: ParkingSlot(key: Key('L2A1'),
                       slotNumber: 'L2_A1',
-                      rowNumber: SIDE_A),
+                      iconPath: SIDE_A),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 12),
+                  child: Entrance(' ', 12),
                 ),
               ],),
             Row(
@@ -280,11 +277,11 @@ class _FloorLayout {
                   padding: const EdgeInsets.all(PADDING),
                   child: ParkingSlot(key: Key('L2A2'),
                       slotNumber: 'L2_A2',
-                      rowNumber: SIDE_A),
+                      iconPath: SIDE_A),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 12),
+                  child: Entrance(' ', 12),
                 ),
               ],),
             Row(
@@ -294,11 +291,11 @@ class _FloorLayout {
                   padding: const EdgeInsets.all(PADDING),
                   child: ParkingSlot(key: Key('L2A3'),
                       slotNumber: 'L2_A3',
-                      rowNumber: SIDE_A),
+                      iconPath: SIDE_A),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 12),
+                  child: Entrance(' ', 12),
                 ),
               ],),
             Row(
@@ -308,33 +305,29 @@ class _FloorLayout {
                   padding: const EdgeInsets.all(PADDING),
                   child: ParkingSlot(key: Key('L2A4'),
                       slotNumber: 'L2_A4',
-                      rowNumber: SIDE_A),
+                      iconPath: SIDE_A),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 12),
+                  child: Entrance(' ', 12),
                 ),
               ],),
-  //          Row(
-  //            mainAxisAlignment: MainAxisAlignment.center,
-  //            children: [
-  //              EmptyBox(),
-  //            ],),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Entrance('↓ To Level 1',5),
               ],),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('Nearest Parking:', 10),
+                  child: Information('Occupied', 'car_A'),
                 ),
-                Information('Occupied', 'car_A'),
-                Information('Free', 'noun_Parking_2313077'),
-
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: Information('Free', 'noun_Parking_2313077'),
+                ),
               ],
             )
           ]
@@ -343,49 +336,10 @@ class _FloorLayout {
     ),
   ];
 
-/// This Function is used to return the layout index (CARD index)
-/// Each Card holds the slots for one level of parking
+/// Used to return the layout index (CARD index).
+/// Each Card holds the slots for one level of parking.
   Card _getFloorLayout(int index) {
-    /// Function that returns the layout (CARD INDEX)
+    /// Returns the layout (CARD INDEX)
     return _layoutOptions.elementAt(index);
   }
 }
-
-
-
-class ShapePainter extends CustomPainter {
-  int rowNumber;
-  BuildContext context;
-  ShapePainter(int rowNumber) {
-    this.rowNumber = rowNumber;
-  }
-
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 5
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
-
-    var path = Path();
-    var box_horizontal = layoutSize.blockSizeHorizontal * 30;
-    var box_vertical = layoutSize.blockSizeVertical * 12;
-    var vertical_length = (4 - rowNumber + 1) * box_vertical;
-    var horizontal_length = (box_horizontal * 2);
-
-    path.moveTo(0, vertical_length);
-    path.lineTo(size.width, size.height / 2);
-    canvas.drawPath(path, paint);
-    path.moveTo(-250,0);
-    path.lineTo(size.width, size.height / 2);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
-

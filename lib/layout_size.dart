@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 
-class layoutSize {
+class LayoutSize {
   static MediaQueryData _mediaQueryData;
   static double screenWidth;
   static double screenHeight;

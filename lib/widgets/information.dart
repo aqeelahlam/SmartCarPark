@@ -1,22 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../layoutSize.dart';
+import '../layout_size.dart';
 
-/// This is a Stateless widget used to draw the road Image on
-/// the User Interface.
-/// The widget is Immutable and will not change after it has been drawn.
+/// This is a Stateful widget used for displaying the meaning of the icons
+/// on the parking slots, for the User Interface.
 ///
 /// Created August 2020
 /// by Bee Khee Siang
-///
+/// Modified October 2020
+/// by Aqeel Ahlam Rauf
+/// Modified October 2020
+/// by Wan Ru Thang
+
 class Information extends StatefulWidget {
-  // Stateful Widget for information
 
-  String info;
+  /// Text to display on this widget.
+  final String info;
+  /// Part of the filepath to the icon displayed on this widget.
+  final String iconPath;
 
+  /// Constructor
   Information(this.info, this.iconPath);
-
-  String iconPath;
 
   @override
   _InformationState createState() => _InformationState();
@@ -28,8 +32,7 @@ class _InformationState extends State<Information> {
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
     return Container(
-      height: layoutSize.blockSizeVertical * 5,
-//      width: layoutSize.blockSizeHorizontal * 18,
+      height: LayoutSize.blockSizeVertical * 5,
       width: queryData.size.width * 0.18,
       decoration: BoxDecoration(
         color: Colors.black12,
@@ -49,12 +52,6 @@ class _InformationState extends State<Information> {
                 textAlign: TextAlign.left,
                 style: TextStyle(fontFamily: 'Lato')),
           ),
-//          child: Text(widget.info,
-//          textAlign: TextAlign.left,
-//          style: TextStyle(
-//            fontFamily: 'Lato',
-//          ),
-//        ),
       ),
       )
     );
