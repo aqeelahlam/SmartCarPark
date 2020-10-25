@@ -12,7 +12,7 @@ class EmptyBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 109,
+      width: 100,
       height: 50,
       alignment: Alignment(0.0, -0.1),
     );
