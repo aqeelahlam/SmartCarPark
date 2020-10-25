@@ -43,12 +43,18 @@ class _InformationState extends State<Information> {
         padding: EdgeInsets.all(10),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Text(widget.info,
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontFamily: 'Lato',
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Text(widget.info,
+                textAlign: TextAlign.left,
+                style: TextStyle(fontFamily: 'Lato')),
           ),
-        ),
+//          child: Text(widget.info,
+//          textAlign: TextAlign.left,
+//          style: TextStyle(
+//            fontFamily: 'Lato',
+//          ),
+//        ),
       ),
       )
     );

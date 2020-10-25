@@ -36,13 +36,18 @@ class _EntranceState extends State<Entrance> {
         color: Colors.black12,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      child: new Text(widget.EntranceName,
-        style: TextStyle(
-          fontSize: 20.0,
-          fontFamily: 'Lato',
-          color: Colors.white,
-        ),
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Text(widget.EntranceName, style: TextStyle(fontFamily: 'Lato', color: Colors.white)),
       ),
+//      child: new Text(widget.EntranceName,
+//        style: TextStyle(
+//
+//          fontSize: 20.0,
+//          fontFamily: 'Lato',
+//          color: Colors.white,
+//        ),
+//      ),
     );
   }
 }

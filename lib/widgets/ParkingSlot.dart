@@ -110,12 +110,16 @@ class _ParkingSlotState extends State<ParkingSlot> {
               padding: EdgeInsets.all(PADDING),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(widget.slotNumber,
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: 'Lato',
-                  ),
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: Text(widget.slotNumber, style: TextStyle(fontFamily: 'Lato')),
                 ),
+//                child: Text(widget.slotNumber,
+//                  style: TextStyle(
+//                      fontSize: 20.0,
+//                      fontFamily: 'Lato',
+//                  ),
+//                ),
               ),
             )
           ),
@@ -162,12 +166,16 @@ class _ParkingSlotState extends State<ParkingSlot> {
                 padding: EdgeInsets.all(PADDING),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(widget.slotNumber,
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontFamily: 'Lato'
-                    ),
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(widget.slotNumber, style: TextStyle(fontFamily: 'Lato')),
                   ),
+//                  child: Text(widget.slotNumber,
+//                    style: TextStyle(
+//                        fontSize: 20.0,
+//                        fontFamily: 'Lato'
+//                    ),
+//                  ),
                 )
             ),
             ),

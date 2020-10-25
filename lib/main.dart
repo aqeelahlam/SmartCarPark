@@ -49,7 +49,8 @@ class MyApp extends StatelessWidget {
     /// Returning a wrapper widget
     return MaterialApp(
       title: 'Smart Car Park',
-      theme: new ThemeData(scaffoldBackgroundColor: Colors.black54),
+//      theme: new ThemeData(scaffoldBackgroundColor: Colors.black54, brightness: Brightness.light),
+      theme: new ThemeData(scaffoldBackgroundColor: Colors.blueGrey, brightness: Brightness.light),
       home: MyHomePage(title: 'Smart Car Park'), /// This is the widget that is running on the home screen
       debugShowCheckedModeBanner: false,
     );
