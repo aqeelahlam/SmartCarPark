@@ -9,20 +9,33 @@ import '../layoutSize.dart';
 /// Created August 2020
 /// by Bee Khee Siang
 ///
-class Entrance extends StatelessWidget {
+class Entrance extends StatefulWidget {
+
+  String EntranceName;
+  double height;
+
+
+  Entrance(this.EntranceName, this.height);
+
+  @override
+  _EntranceState createState() => _EntranceState();
+}
+
+class _EntranceState extends State<Entrance> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: layoutSize.blockSizeVertical * 8,
-      width: layoutSize.blockSizeHorizontal * 25,
+      height: layoutSize.blockSizeVertical * widget.height,
+      width: layoutSize.blockSizeHorizontal * 30,
       alignment: Alignment(0.0, 0.0),
       decoration: BoxDecoration(
-        color: Colors.black54,
-        border: Border.all(),
+        color: Colors.black12,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      child: new Text('Entrance/Exit',
+      child: new Text(widget.EntranceName,
         style: TextStyle(
           fontSize: 20.0,
+          fontFamily: 'Lato',
           color: Colors.white,
         ),
       ),

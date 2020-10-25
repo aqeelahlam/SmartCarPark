@@ -3,6 +3,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/layoutSize.dart';
+import 'package:myapp/utils/constants.dart';
 import '../Slots.dart';
 import '../main.dart';
 
@@ -17,7 +18,7 @@ import '../main.dart';
 ///
 class ParkingSlot extends StatefulWidget {
 
-  // StatelessWidget of the Parking slot
+  // Stateful Widget of the Parking slot
   String slotNumber;
   String rowNumber;
 
@@ -39,7 +40,7 @@ class _ParkingSlotState extends State<ParkingSlot> {
 
   @override
   void initState() {
-    checkStatus(widget.slotNumber);  // check slot status from firebase
+    //checkStatus(widget.slotNumber);  // check slot status from firebase
     super.initState();
   }
 
@@ -88,29 +89,35 @@ class _ParkingSlotState extends State<ParkingSlot> {
             leftBarIndicatorColor: Colors.blue[300],
           )
             ..show(context);
-
-          CustomPaint(
-            painter: ShapePainter(1),
-          );
         },
-        child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(PADDING2),
+          child: Container(
 //          height: queryData.size.height/6,
 //          width: queryData.size.width/4,
-          height: layoutSize.blockSizeVertical * 12,
-          width: layoutSize.blockSizeHorizontal * 30,
-          decoration: BoxDecoration(
-            color: Colors.green,
-            border: Border.all(),
-            image: DecorationImage(
-              image: AssetImage('assets/images/noun_Parking_2313077.png'),
+            height: layoutSize.blockSizeVertical * 12,
+            width: layoutSize.blockSizeHorizontal * 30,
+            decoration: BoxDecoration(
+              color: Colors.green[600],
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+              image: DecorationImage(
+                image: AssetImage('assets/images/noun_Parking_2313077.png'),
+              ),
             ),
+            child: Container(
+              padding: EdgeInsets.all(PADDING),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(widget.slotNumber,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: 'Lato',
+                  ),
+                ),
+              ),
+            )
           ),
-          child: new Text(widget.slotNumber,
-            style: TextStyle(
-                fontSize: 20.0
-            ),
-          ),
-        ),
+        )
       );
     }
 
@@ -134,22 +141,32 @@ class _ParkingSlotState extends State<ParkingSlot> {
             )
               ..show(context);
           },
-          child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(PADDING2),
+            child: Container(
 //            height: queryData.size.height/6,
 //            width: queryData.size.width/4,
-            height: layoutSize.blockSizeVertical * 12,
-            width: layoutSize.blockSizeHorizontal * 30,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              border: Border.all(),
-              image: DecorationImage(
-                image: AssetImage('assets/images/' + widget.rowNumber + '.png'),
+              height: layoutSize.blockSizeVertical * 12,
+              width: layoutSize.blockSizeHorizontal * 30,
+              decoration: BoxDecoration(
+                color: Colors.red[700],
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/' + widget.rowNumber + '.png'),
+                ),
               ),
+              child: Container(
+                padding: EdgeInsets.all(PADDING),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(widget.slotNumber,
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontFamily: 'Lato'
+                    ),
+                  ),
+                )
             ),
-            child: new Text(widget.slotNumber,
-              style: TextStyle(
-                  fontSize: 20.0
-              ),
             ),
           )
       );
