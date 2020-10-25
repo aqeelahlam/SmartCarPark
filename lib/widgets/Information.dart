@@ -25,9 +25,12 @@ class Information extends StatefulWidget {
 class _InformationState extends State<Information> {
   @override
   Widget build(BuildContext context) {
+    MediaQueryData queryData;
+    queryData = MediaQuery.of(context);
     return Container(
       height: layoutSize.blockSizeVertical * 5,
-      width: layoutSize.blockSizeHorizontal * 18,
+//      width: layoutSize.blockSizeHorizontal * 18,
+      width: queryData.size.width * 0.18,
       decoration: BoxDecoration(
         color: Colors.black12,
         borderRadius: BorderRadius.all(Radius.circular(10)),

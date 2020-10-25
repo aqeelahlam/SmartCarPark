@@ -129,107 +129,109 @@ class _FloorLayout {
           borderRadius: BorderRadius.circular(10),
         ),
         color: Colors.black26,
-        child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(PADDING),
-                    child: Entrance('↑ To Level 2', 4),
-                  ),
-                  Entrance('Level 1', 4),
-                  Padding(
-                    padding: const EdgeInsets.all(PADDING),
-                    child: Entrance('↗ Mall Entrance', 4),
-                  ),
-                ],),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(PADDING),
-                    child: ParkingSlot(key: Key('L1A1'),
-                              slotNumber: 'L1_A1',
-                              rowNumber: SIDE_A),
-                  ),
-                   Padding(
-                     padding: EdgeInsets.all(PADDING),
-                     child: ParkingSlot(key: Key('L1B1'),
-                      slotNumber: 'L1_B1',
-                      rowNumber: SIDE_B),
-                   ),
-                ],),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(PADDING),
-                    child: ParkingSlot(key: Key('L1A2'),
-                        slotNumber: 'L1_A2',
-                        rowNumber: SIDE_A),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(PADDING),
-                    child: ParkingSlot(key: Key('L1B2'),
-                        slotNumber: 'L1_B2',
-                        rowNumber: SIDE_B),
-                  ),
-                ],),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(PADDING),
-                    child: ParkingSlot(key: Key('L1A3'),
-                        slotNumber: 'L1_A3',
-                        rowNumber: SIDE_A),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(PADDING),
-                    child: ParkingSlot(key: Key('L1B3'),
-                        slotNumber: 'L1_B3',
-                        rowNumber: SIDE_B),
-                  ),
-                ],),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(PADDING),
-                    child: ParkingSlot(key: Key('L1A4'),
-                        slotNumber: 'L1_A4',
-                        rowNumber: SIDE_A),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(PADDING),
-                    child: ParkingSlot(key: Key('L1B4'),
-                        slotNumber: 'L1_B4',
-                        rowNumber: SIDE_B),
-                  ),
-                ],),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  EmptyBox(),
-                ],),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Entrance('↑ Entrance - Exit ↓', 5),
-                ],),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
+        child: SingleChildScrollView(
+          child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.all(PADDING),
-                      child: Entrance('Nearest Parking:', 10),
+                      child: Entrance('↑ To Level 2', 4),
                     ),
-                  Information('Occupied', 'car_A'),
-                  Information('Free', 'noun_Parking_2313077'),
-                ],
-              )
-            ]
+//                    Entrance('Level 1', 4),
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: Entrance('↗ Mall Entrance', 4),
+                    ),
+                  ],),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(PADDING),
+                      child: ParkingSlot(key: Key('L1A1'),
+                                slotNumber: 'L1_A1',
+                                rowNumber: SIDE_A),
+                    ),
+                     Padding(
+                       padding: EdgeInsets.all(PADDING),
+                       child: ParkingSlot(key: Key('L1B1'),
+                        slotNumber: 'L1_B1',
+                        rowNumber: SIDE_B),
+                     ),
+                  ],),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: ParkingSlot(key: Key('L1A2'),
+                          slotNumber: 'L1_A2',
+                          rowNumber: SIDE_A),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: ParkingSlot(key: Key('L1B2'),
+                          slotNumber: 'L1_B2',
+                          rowNumber: SIDE_B),
+                    ),
+                  ],),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: ParkingSlot(key: Key('L1A3'),
+                          slotNumber: 'L1_A3',
+                          rowNumber: SIDE_A),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: ParkingSlot(key: Key('L1B3'),
+                          slotNumber: 'L1_B3',
+                          rowNumber: SIDE_B),
+                    ),
+                  ],),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: ParkingSlot(key: Key('L1A4'),
+                          slotNumber: 'L1_A4',
+                          rowNumber: SIDE_A),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: ParkingSlot(key: Key('L1B4'),
+                          slotNumber: 'L1_B4',
+                          rowNumber: SIDE_B),
+                    ),
+                  ],),
+  //              Row(
+  //                mainAxisAlignment: MainAxisAlignment.center,
+  //                children: [
+  //                  EmptyBox(),
+  //                ],),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Entrance('↑ Entrance - Exit ↓', 5),
+                  ],),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                        padding: const EdgeInsets.all(PADDING),
+                        child: Entrance('Nearest Parking:', 10),
+                      ),
+                    Information('Occupied', 'car_A'),
+                    Information('Free', 'noun_Parking_2313077'),
+                  ],
+                )
+              ]
+          )
         )
     ),
 
@@ -241,100 +243,102 @@ class _FloorLayout {
           borderRadius: BorderRadius.circular(10.0),
         ),
         color: Colors.black26,
-        child: Column(children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: Entrance('', 4),
-              ),
-              Entrance('Level 2', 4),
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: Entrance('↗ Mall Entrance', 4),
-              ),
-            ],),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: ParkingSlot(key: Key('L2A1'),
-                    slotNumber: 'L2_A1',
-                    rowNumber: SIDE_A),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: Entrance('', 12),
-              ),
-            ],),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: ParkingSlot(key: Key('L2A2'),
-                    slotNumber: 'L2_A2',
-                    rowNumber: SIDE_A),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: Entrance('', 12),
-              ),
-            ],),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: ParkingSlot(key: Key('L2A3'),
-                    slotNumber: 'L2_A3',
-                    rowNumber: SIDE_A),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: Entrance('', 12),
-              ),
-            ],),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: ParkingSlot(key: Key('L2A4'),
-                    slotNumber: 'L2_A4',
-                    rowNumber: SIDE_A),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(PADDING),
-                child: Entrance('', 12),
-              ),
-            ],),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              EmptyBox(),
-            ],),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Entrance('↓ To Level 1',5),
-            ],),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(PADDING),
-                child: Entrance('Nearest Parking:', 10),
-              ),
-              Information('Occupied', 'car_A'),
-              Information('Free', 'noun_Parking_2313077'),
+        child: SingleChildScrollView(
+          child: Column(children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: Entrance('', 4),
+                ),
+//                Entrance('Level 2', 4),
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: Entrance('↗ Mall Entrance', 4),
+                ),
+              ],),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: ParkingSlot(key: Key('L2A1'),
+                      slotNumber: 'L2_A1',
+                      rowNumber: SIDE_A),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: Entrance('', 12),
+                ),
+              ],),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: ParkingSlot(key: Key('L2A2'),
+                      slotNumber: 'L2_A2',
+                      rowNumber: SIDE_A),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: Entrance('', 12),
+                ),
+              ],),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: ParkingSlot(key: Key('L2A3'),
+                      slotNumber: 'L2_A3',
+                      rowNumber: SIDE_A),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: Entrance('', 12),
+                ),
+              ],),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: ParkingSlot(key: Key('L2A4'),
+                      slotNumber: 'L2_A4',
+                      rowNumber: SIDE_A),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: Entrance('', 12),
+                ),
+              ],),
+  //          Row(
+  //            mainAxisAlignment: MainAxisAlignment.center,
+  //            children: [
+  //              EmptyBox(),
+  //            ],),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Entrance('↓ To Level 1',5),
+              ],),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: Entrance('Nearest Parking:', 10),
+                ),
+                Information('Occupied', 'car_A'),
+                Information('Free', 'noun_Parking_2313077'),
 
-            ],
-          )
-        ]
+              ],
+            )
+          ]
         )
+      )
     ),
   ];
 

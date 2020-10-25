@@ -17,6 +17,7 @@ class Entrance extends StatefulWidget {
 
   Entrance(this.EntranceName, this.height);
 
+
   @override
   _EntranceState createState() => _EntranceState();
 }
@@ -24,9 +25,12 @@ class Entrance extends StatefulWidget {
 class _EntranceState extends State<Entrance> {
   @override
   Widget build(BuildContext context) {
+    MediaQueryData queryData;
+    queryData = MediaQuery.of(context);
     return Container(
       height: layoutSize.blockSizeVertical * widget.height,
-      width: layoutSize.blockSizeHorizontal * 30,
+//      width: layoutSize.blockSizeHorizontal * 30,
+      width: queryData.size.width * 0.30,
       alignment: Alignment(0.0, 0.0),
       decoration: BoxDecoration(
         color: Colors.black12,

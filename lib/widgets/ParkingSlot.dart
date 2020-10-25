@@ -96,8 +96,10 @@ class _ParkingSlotState extends State<ParkingSlot> {
 //          height: queryData.size.height/6,
 //          width: queryData.size.width/4,
             height: layoutSize.blockSizeVertical * 12,
-            width: layoutSize.blockSizeHorizontal * 30,
-            decoration: BoxDecoration(
+//            width: layoutSize.blockSizeHorizontal * 30,
+//            height: queryData.size.height * 0.12,
+            width: queryData.size.width * 0.30,
+              decoration: BoxDecoration(
               color: Colors.green[600],
               borderRadius: BorderRadius.all(Radius.circular(15)),
               image: DecorationImage(
@@ -147,7 +149,8 @@ class _ParkingSlotState extends State<ParkingSlot> {
 //            height: queryData.size.height/6,
 //            width: queryData.size.width/4,
               height: layoutSize.blockSizeVertical * 12,
-              width: layoutSize.blockSizeHorizontal * 30,
+//              width: layoutSize.blockSizeHorizontal * 30,
+              width: queryData.size.width * 0.30,
               decoration: BoxDecoration(
                 color: Colors.red[700],
                 borderRadius: BorderRadius.all(Radius.circular(15)),
