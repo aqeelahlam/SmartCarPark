@@ -1,4 +1,4 @@
-import 'package:flutter/painting.dart';
+///This file stores some constants used when building widgets.
 
 const String SIDE_A = "car_A";
 const String SIDE_B = "car_B";
