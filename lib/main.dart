@@ -217,14 +217,16 @@ class _FloorLayout {
                     Entrance('↑ Entrance - Exit ↓', 5),
                   ],),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                        padding: const EdgeInsets.all(PADDING),
-                        child: Entrance('Nearest Parking:', 10),
-                      ),
-                    Information('Occupied', 'car_A'),
-                    Information('Free', 'noun_Parking_2313077'),
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: Information('Occupied', 'car_A'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(PADDING),
+                      child: Information('Free', 'noun_Parking_2313077'),
+                    ),
                   ],
                 )
               ]
@@ -316,15 +318,16 @@ class _FloorLayout {
                 Entrance('↓ To Level 1',5),
               ],),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('Nearest Parking:', 10),
+                  child: Information('Occupied', 'car_A'),
                 ),
-                Information('Occupied', 'car_A'),
-                Information('Free', 'noun_Parking_2313077'),
-
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: Information('Free', 'noun_Parking_2313077'),
+                ),
               ],
             )
           ]

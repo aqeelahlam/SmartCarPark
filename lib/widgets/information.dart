@@ -11,8 +11,7 @@ import '../layout_size.dart';
 /// by Aqeel Ahlam Rauf
 /// Modified October 2020
 /// by Wan Ru Thang
-///
-///
+
 class Information extends StatefulWidget {
 
   /// Text to display on this widget.
