@@ -40,7 +40,7 @@ class _ParkingSlotState extends State<ParkingSlot> {
 
   @override
   void initState() {
-    //checkStatus(widget.slotNumber);  // check slot status from firebase
+    checkStatus(widget.slotNumber);  // check slot status from firebase
     super.initState();
   }
 
