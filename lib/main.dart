@@ -251,7 +251,7 @@ class _FloorLayout {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 4),
+                  child: Entrance(' ', 4),
                 ),
 //                Entrance('Level 2', 4),
                 Padding(
@@ -270,7 +270,7 @@ class _FloorLayout {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 12),
+                  child: Entrance(' ', 12),
                 ),
               ],),
             Row(
@@ -284,7 +284,7 @@ class _FloorLayout {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 12),
+                  child: Entrance(' ', 12),
                 ),
               ],),
             Row(
@@ -298,7 +298,7 @@ class _FloorLayout {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 12),
+                  child: Entrance(' ', 12),
                 ),
               ],),
             Row(
@@ -312,7 +312,7 @@ class _FloorLayout {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(PADDING),
-                  child: Entrance('', 12),
+                  child: Entrance(' ', 12),
                 ),
               ],),
   //          Row(
